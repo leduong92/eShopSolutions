@@ -29,6 +29,8 @@ namespace eShopSolutions.AdminApp
         {
             services.AddHttpClient();
 
+           
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
             {
@@ -37,6 +39,8 @@ namespace eShopSolutions.AdminApp
             });
 
             services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()); ;
+
+            services.AddSession();
 
             services.AddTransient<IUserApiClient, UserApiClient>();
 
@@ -71,6 +75,8 @@ namespace eShopSolutions.AdminApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
