@@ -1,15 +1,14 @@
 ﻿using eShopSolutions.ViewModel.System.Users;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace eShopSolutions.Application.System.Users
+namespace eShopSolutions.AdminApp.Services
 {
-    public interface IUserService
+    public interface IUserApiClient
     {
         Task<string> Authenticate(LoginRequest request);
-
-        Task<bool> Register(RegisterRequest request);
+        
     }
 }

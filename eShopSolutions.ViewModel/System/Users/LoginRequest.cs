@@ -4,7 +4,7 @@ using System.Text;
 
 namespace eShopSolutions.ViewModel.System.Users
 {
-    public class LoginRequset
+    public class LoginRequest
     {
         public string UserName { get; set; }
         public string Password { get; set; }
