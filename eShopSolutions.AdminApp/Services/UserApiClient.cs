@@ -24,10 +24,10 @@ namespace eShopSolutions.AdminApp.Services
         public async Task<string> Authenticate(LoginRequest request)
         {
             var json = JsonConvert.SerializeObject(request);
-            var httpConent = new StringContent(json, Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            var response = await client.PostAsync("/api/users/Authenticate", httpConent);
+            var response = await client.PostAsync("/api/users/Authenticate", httpContent);
             var token = await response.Content.ReadAsStringAsync();
             return token;
 
@@ -43,5 +43,18 @@ namespace eShopSolutions.AdminApp.Services
             var users = JsonConvert.DeserializeObject <PagedResult<UserVm>> (body);
             return users;
         }
+
+        public async Task<bool> RegisterUser(RegisterRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"/api/users/", httpContent);
+            return response.IsSuccessStatusCode;
+        }
     }
 }
+ 
